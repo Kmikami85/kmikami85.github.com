@@ -4,7 +4,7 @@
   <title><![CDATA[Category: BeagleBoard-xM | My Tech Blog]]></title>
   <link href="http://Kmikami85.github.com/blog/categories/beagleboard-xm/atom.xml" rel="self"/>
   <link href="http://Kmikami85.github.com/"/>
-  <updated>2014-02-03T17:29:49+09:00</updated>
+  <updated>2014-02-03T17:39:38+09:00</updated>
   <id>http://Kmikami85.github.com/</id>
   <author>
     <name><![CDATA[Mikami Kazuya]]></name>
@@ -258,7 +258,7 @@ Query OK, 0 rows affected (0.00 sec)</p>
 <p>MariaDB [(none)]> set password for root@kazuya = password(&lsquo;******&rsquo;);
 Query OK, 0 rows affected (0.00 sec)</p>
 
-<p>MariaDB [(none)]> set password for <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#x3a;&#114;&#111;&#x6f;&#116;&#64;&#x31;&#50;&#55;&#x2e;&#48;&#x2e;&#48;&#46;&#49;">&#x72;&#111;&#x6f;&#116;&#x40;&#x31;&#50;&#x37;&#x2e;&#48;&#x2e;&#48;&#x2e;&#x31;</a> = password(&lsquo;******&rsquo;);
+<p>MariaDB [(none)]> set password for <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#x72;&#x6f;&#111;&#x74;&#64;&#49;&#x32;&#x37;&#x2e;&#48;&#46;&#x30;&#46;&#49;">&#114;&#x6f;&#111;&#116;&#x40;&#x31;&#x32;&#55;&#46;&#48;&#x2e;&#x30;&#x2e;&#49;</a> = password(&lsquo;******&rsquo;);
 Query OK, 0 rows affected (0.00 sec)</p>
 
 <p>MariaDB [(none)]> select host,user,password from mysql.user;
@@ -311,7 +311,7 @@ pacman -S php-mcrypt
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Setup Wireless Network With USB Wifi Adapter]]></title>
+    <title type="html"><![CDATA[Setup wireless network with USB wifi adapter]]></title>
     <link href="http://Kmikami85.github.com/blog/2014/02/03/setup-wireless-network-with-usb-wifi-adapter/"/>
     <updated>2014-02-03T16:17:23+09:00</updated>
     <id>http://Kmikami85.github.com/blog/2014/02/03/setup-wireless-network-with-usb-wifi-adapter</id>

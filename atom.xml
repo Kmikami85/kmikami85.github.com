@@ -4,7 +4,7 @@
   <title><![CDATA[My Tech Blog]]></title>
   <link href="http://Kmikami85.github.com/atom.xml" rel="self"/>
   <link href="http://Kmikami85.github.com/"/>
-  <updated>2014-02-03T17:29:49+09:00</updated>
+  <updated>2014-02-03T17:39:38+09:00</updated>
   <id>http://Kmikami85.github.com/</id>
   <author>
     <name><![CDATA[Mikami Kazuya]]></name>
@@ -357,7 +357,7 @@ P &mdash; PHP</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Setup Wireless Network With USB Wifi Adapter]]></title>
+    <title type="html"><![CDATA[Setup wireless network with USB wifi adapter]]></title>
     <link href="http://Kmikami85.github.com/blog/2014/02/03/setup-wireless-network-with-usb-wifi-adapter/"/>
     <updated>2014-02-03T16:17:23+09:00</updated>
     <id>http://Kmikami85.github.com/blog/2014/02/03/setup-wireless-network-with-usb-wifi-adapter</id>
