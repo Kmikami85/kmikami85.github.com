@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://Kmikami85.github.com/blog/2014/02/03/test/</loc>
-        <lastmod>2014-02-03T14:41:45+09:00</lastmod>
+        <loc>http://Kmikami85.github.com/blog/2014/02/03/sd-card-creation/</loc>
+        <lastmod>2014-02-03T15:58:01+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://Kmikami85.github.com/blog/2014/02/03/arch-linux-installation/</loc>
+        <lastmod>2014-02-03T16:11:46+09:00</lastmod>
     </url>
     <url>
         <loc>http://Kmikami85.github.com/blog/archives/</loc>
-        <lastmod>2014-02-03T14:41:45+09:00</lastmod>
+        <lastmod>2014-02-03T16:11:46+09:00</lastmod>
     </url>
     <url>
         <loc>http://Kmikami85.github.com/robots.txt</loc>
@@ -14,6 +18,6 @@
     </url>
     <url>
         <loc>http://Kmikami85.github.com/</loc>
-        <lastmod>2014-02-03T14:41:45+09:00</lastmod>
+        <lastmod>2014-02-03T16:11:46+09:00</lastmod>
     </url>
 </urlset>

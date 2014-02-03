@@ -4,7 +4,7 @@
   <title><![CDATA[My Tech Blog]]></title>
   <link href="http://Kmikami85.github.com/atom.xml" rel="self"/>
   <link href="http://Kmikami85.github.com/"/>
-  <updated>2014-02-03T14:50:43+09:00</updated>
+  <updated>2014-02-03T16:12:39+09:00</updated>
   <id>http://Kmikami85.github.com/</id>
   <author>
     <name><![CDATA[Mikami Kazuya]]></name>
@@ -14,12 +14,321 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Test]]></title>
-    <link href="http://Kmikami85.github.com/blog/2014/02/03/test/"/>
-    <updated>2014-02-03T14:28:05+09:00</updated>
-    <id>http://Kmikami85.github.com/blog/2014/02/03/test</id>
-    <content type="html"><![CDATA[<p>This is just a test.
-test test test.</p>
+    <title type="html"><![CDATA[Arch Linux Installation]]></title>
+    <link href="http://Kmikami85.github.com/blog/2014/02/03/arch-linux-installation/"/>
+    <updated>2014-02-03T16:04:49+09:00</updated>
+    <id>http://Kmikami85.github.com/blog/2014/02/03/arch-linux-installation</id>
+    <content type="html"><![CDATA[<p>If you are able to see below prompt after power-ON beagleboard-xM with inserting SD card,
+It means you have installed Arch Linux successfully. Let&rsquo;s start basic setting of Linux.</p>
+
+<h2>1. Enter Arch Linux.(login:root password:root)</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Arch Linux 3.7.10-9-ARCH (ttyO2)
+</span><span class='line'>
+</span><span class='line'>alarm login: root
+</span><span class='line'>Password:</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Change host name.(hostname:kazuya-server)</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; hostnamectl set-hostname kazuya-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The command will be reflected on /etc/hostname.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cat /etc/hostname
+</span><span class='line'>kazuya-server</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Add User.(user id:kazuya)</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;useradd -m -s /bin/bash kazuya
+</span><span class='line'>&gt;passwd kazuya
+</span><span class='line'>Enter new UNIX password:
+</span><span class='line'>Retype new UNIX password:
+</span><span class='line'>passwd: password updated successfully</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Enable added user to use root command with using sudo command.</h2>
+
+<p>Open visudo editor for this particular purpose.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; VISUAL="/usr/bin/vim -p -X" visudo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add new below line to give sudo permission.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>##
+</span><span class='line'>## User privilege specification
+</span><span class='line'>##
+</span><span class='line'>root ALL=(ALL) ALL
+</span><span class='line'>kazuya ALL=(ALL) ALL    // Give sudo permission to user "kazuya".</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. Change locale as Japanese setting.</h2>
+
+<p>Open the text /etc/locale.gen using any editor.
+Uncomment below lines.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#en_SG ISO-8859-1
+</span><span class='line'>en_US.UTF-8 UTF-8    // UTF-8 support for English.
+</span><span class='line'>#en_US ISO-8859-1
+</span><span class='line'>
+</span><span class='line'>#ja_JP.EUC-JP EUC-JP
+</span><span class='line'>ja_JP.UTF-8 UTF-8    // UTF-8 support for Japanese.
+</span><span class='line'>#ka_GE.UTF-8 UTF-8</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SD Card Creation]]></title>
+    <link href="http://Kmikami85.github.com/blog/2014/02/03/sd-card-creation/"/>
+    <updated>2014-02-03T14:59:15+09:00</updated>
+    <id>http://Kmikami85.github.com/blog/2014/02/03/sd-card-creation</id>
+    <content type="html"><![CDATA[<p>This archive provides how to create micro SD card for BeagleBoard-xM with bundled Arch Linux.
+Arch Linux requires advance knowledge of Linux otherwise it won&rsquo;t work anything.
+Please note, below steps are expected to be performed on Linux machine.
+In my case I used Ubuntu for the creation.</p>
+
+<h2>1. Create SD card partition.(Assuming micro SD card is detected as /dev/sdb)</h2>
+
+<p>I used 16GB SD card, created 128MB space for boot partition and remaining size space for rootfs partition.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; fdisk /dev/sdb
+</span><span class='line'>Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+</span><span class='line'>Building a new DOS disklabel with disk identifier 0xf8d3c4ab.
+</span><span class='line'>Changes will remain in memory only, until you decide to write them.
+</span><span class='line'>After that, of course, the previous content won't be recoverable.
+</span><span class='line'>
+</span><span class='line'>Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+</span><span class='line'>
+</span><span class='line'>Command (m for help): n
+</span><span class='line'>Partition type:
+</span><span class='line'>   p   primary (0 primary, 0 extended, 4 free)
+</span><span class='line'>   e   extended
+</span><span class='line'>Select (default p): p
+</span><span class='line'>Partition number (1-4, default 1): 1
+</span><span class='line'>First sector (2048-30703615, default 2048):
+</span><span class='line'>Using default value 2048
+</span><span class='line'>Last sector, +sectors or +size{K,M,G} (2048-30703615, default 30703615): +128M
+</span><span class='line'>
+</span><span class='line'>Command (m for help): t
+</span><span class='line'>Selected partition 1
+</span><span class='line'>Hex code (type L to list codes): e
+</span><span class='line'>Changed system type of partition 1 to e (W95 FAT16 (LBA))
+</span><span class='line'>
+</span><span class='line'>Command (m for help): a
+</span><span class='line'>Partition number (1-4): 1
+</span><span class='line'>
+</span><span class='line'>Command (m for help): m
+</span><span class='line'>Command action
+</span><span class='line'>   a   toggle a bootable flag
+</span><span class='line'>   b   edit bsd disklabel
+</span><span class='line'>   c   toggle the dos compatibility flag
+</span><span class='line'>   d   delete a partition
+</span><span class='line'>   l   list known partition types
+</span><span class='line'>   m   print this menu
+</span><span class='line'>   n   add a new partition
+</span><span class='line'>   o   create a new empty DOS partition table
+</span><span class='line'>   p   print the partition table
+</span><span class='line'>   q   quit without saving changes
+</span><span class='line'>   s   create a new empty Sun disklabel
+</span><span class='line'>   t   change a partition's system id
+</span><span class='line'>   u   change display/entry units
+</span><span class='line'>   v   verify the partition table
+</span><span class='line'>   w   write table to disk and exit
+</span><span class='line'>   x   extra functionality (experts only)
+</span><span class='line'>
+</span><span class='line'>Command (m for help): n
+</span><span class='line'>Partition type:
+</span><span class='line'>   p   primary (1 primary, 0 extended, 3 free)
+</span><span class='line'>   e   extended
+</span><span class='line'>Select (default p): p
+</span><span class='line'>Partition number (1-4, default 2): 2
+</span><span class='line'>First sector (264192-30703615, default 264192):
+</span><span class='line'>Using default value 264192
+</span><span class='line'>Last sector, +sectors or +size{K,M,G} (264192-30703615, default 30703615):
+</span><span class='line'>Using default value 30703615
+</span><span class='line'>
+</span><span class='line'>Command (m for help): w
+</span><span class='line'>The partition table has been altered!
+</span><span class='line'>
+</span><span class='line'>Calling ioctl() to re-read partition table.
+</span><span class='line'>
+</span><span class='line'>WARNING: If you have created or modified any DOS 6.x
+</span><span class='line'>partitions, please see the fdisk manual page for additional
+</span><span class='line'>information.
+</span><span class='line'>Syncing disks.</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Format created the partitions.</h2>
+
+<p>Be sure to copy MLO first.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; wget http://archlinuxarm.org/os/omap/BeagleBoard-bootloader.tar.gz
+</span><span class='line'>&gt; tar xvzf BeagleBoard-bootloader.tar.gz
+</span><span class='line'>./mkcard.sh
+</span><span class='line'>./MLO
+</span><span class='line'>./u-boot.bin
+</span><span class='line'>./uEnv.txt
+</span><span class='line'>&gt; cp MLO /media/boot/
+</span><span class='line'>&gt; cp MLO u* /media/boot/
+</span><span class='line'>&gt; sync</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Download ArchLinux file system and copy to boot partition.</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; wget http://archlinuxarm.org/os/ArchLinuxARM-omap-smp-latest.tar.gz
+</span><span class='line'>&gt; tar xvpzf ArchLinuxARM-omap-smp-latest.tar.gz -C /media/rootfs/</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Copy kernel image which is existing under the rootfs/boot/ to boot partition.</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cp /media/rootfs/boot/uImage .
+</span><span class='line'>&gt; sync
+</span><span class='line'>&gt; ls
+</span><span class='line'>ArchLinuxARM-omap-smp-latest.tar.gz BeagleBoard-bootloader.tar.gz uImage
+</span><span class='line'>&gt; cp uImage /media/boot/
+</span><span class='line'>&gt; sync</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. Create boot.scr through boot.cmd.</h2>
+
+<p>Here contents of boot.cmd for example.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>setenv bootargs 'console=ttyO2,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext3 rootwait'
+</span><span class='line'>mmc rescan
+</span><span class='line'>fatload mmc 0 0x80300000 uImage
+</span><span class='line'>bootm 0x80300000
+</span><span class='line'>boot</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Execute below command to make boot.scr.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; mkimage -A arm -O linux -T script -C none -a 0 -e 0 -n "Beagleboard-xM boot script" -d boot.cmd boot.scr</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>6. Copy boot.cmd and boot.scr to boot partition.</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cp boot.cmd boot.scr /media/boot/
+</span><span class='line'>&gt; sync</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
