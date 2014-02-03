@@ -4,7 +4,7 @@
   <title><![CDATA[My Tech Blog]]></title>
   <link href="http://Kmikami85.github.com/atom.xml" rel="self"/>
   <link href="http://Kmikami85.github.com/"/>
-  <updated>2014-02-03T16:35:23+09:00</updated>
+  <updated>2014-02-03T17:29:49+09:00</updated>
   <id>http://Kmikami85.github.com/</id>
   <author>
     <name><![CDATA[Mikami Kazuya]]></name>
@@ -12,6 +12,349 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Yoct Project Installation]]></title>
+    <link href="http://Kmikami85.github.com/blog/2014/02/03/yoct-project-installation/"/>
+    <updated>2014-02-03T17:09:19+09:00</updated>
+    <id>http://Kmikami85.github.com/blog/2014/02/03/yoct-project-installation</id>
+    <content type="html"><![CDATA[<p>Here an instruction to install Yoct on BeagleBoard-xM.</p>
+
+<h2>1. Yoct Project source code.</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ wget http://downloads.yoctoproject.org/releases/yocto/yocto-1.5/poky-dora-10.0.0.tar.bz2</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ tar xvjf poky-dora-10.0.0.tar.bz2</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Setting up required packages.</h2>
+
+<p>The essential and graphical support packages are required for a Ubuntu distribution.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ sudo apt-get install sed wget subversion git-core coreutils unzip texi2html texinfo libsdl1.2-dev docbook-utils fop gawk python-pysqlite2 diffstat make gcc build-essential xsltproc g++ desktop-file-utils chrpath libgl1-mesa-dev libglu1-mesa-dev autoconf automake groff libtool xterm libxml-parser-perl</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Initializing build environment.</h2>
+
+<p>Create working directory.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ mkdir myYoct</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configure to enable the created working directory to use build environment.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ source poky-dora-10.0.0/oe-init-build-env myYoct</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Configuring local.conf.</h2>
+
+<p>Initialize build setting and target setting through a conf/local.conf existing in working directory.
+Now I&rsquo;m suppose to use hardware board target machine Beagleboard-xM, it&rsquo;s required to change as below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MACHINE ?= "beagleboard"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I also have modified processor number to speedup build process.
+We could change variable from 2 to &lt;processor number&gt; * 2.
+Assuming I&rsquo;m using build machine which has Intel Core i5-2537M, processor number is 2.
+Then I could set 4 as below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>BB_NUMBER_THREADS = "4"&lt;br /&gt;PARALLEL_MAKE = "-j 4"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. Building the image.</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~/myYoct$ bitbake core-image-minimal</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LAMP Installation]]></title>
+    <link href="http://Kmikami85.github.com/blog/2014/02/03/lamp-installation/"/>
+    <updated>2014-02-03T16:44:27+09:00</updated>
+    <id>http://Kmikami85.github.com/blog/2014/02/03/lamp-installation</id>
+    <content type="html"><![CDATA[<p>This article provides the way how to install LAMP with meaning in below on ArchLinux setup for bringing web development environment.</p>
+
+<p>L &mdash; Linux <br/>
+A &mdash; Apache <br/>
+M &mdash; MariaDB<br/>
+P &mdash; PHP</p>
+
+<h2>1. Install all required packages.</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; pacman -S apache
+</span><span class='line'>&gt; pacman -S php
+</span><span class='line'>&gt; pacman -S php-apache
+</span><span class='line'>&gt; pacman -S mariadb</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Apache configuration.</h2>
+
+<p>Backup original httpd.conf file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cp httpd.conf httpd.conf.org</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit /etc/httpd/conf/httpd.conf file to support PHP on Apache.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LoadModule php5_module modules/libphp5.so
+</span><span class='line'>
+</span><span class='line'>:
+</span><span class='line'>
+</span><span class='line'># PHP support on Apache
+</span><span class='line'>Include conf/extra/php5_module.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit /etc/httpd/conf/mime.types to support expension php and php5.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>application/x-httpd-php                         php php5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit /etc/httpd/conf/httpd.conf file to include user directory config file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#User directory settings
+</span><span class='line'>Include conf/extra/httpd-userdir.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create web sharing folder under user directory.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; mkdir /home/kazuya/public_html
+</span><span class='line'>&gt; chmod o+x /home/kazuya/public_html/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configure user directory setting on /etc/httpd/conf/extra/httpd-userdir.conf for example..</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Settings for user home directories
+</span><span class='line'>#
+</span><span class='line'># Required module: mod_userdir
+</span><span class='line'>
+</span><span class='line'>#
+</span><span class='line'># UserDir: The name of the directory that is appended onto a user's home
+</span><span class='line'># directory if a ~user request is received.  Note that you must also set
+</span><span class='line'># the default access control for these directories, as in the example below.
+</span><span class='line'>#
+</span><span class='line'>UserDir public_html
+</span><span class='line'>
+</span><span class='line'>#
+</span><span class='line'># Control access to UserDir directories.  The following is an example
+</span><span class='line'># for a site where these directories are restricted to read-only.
+</span><span class='line'>#
+</span><span class='line'>
+</span><span class='line'>    AllowOverride FileInfo AuthConfig Limit Indexes
+</span><span class='line'>    Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+</span><span class='line'>    
+</span><span class='line'>        Order allow,deny
+</span><span class='line'>        Allow from all
+</span><span class='line'>    
+</span><span class='line'>
+</span><span class='line'>        Order deny,allow
+</span><span class='line'>        Deny from all</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SSL setting.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cd /etc/httpd/conf
+</span><span class='line'>&gt; openssl genrsa -out server.key 2048
+</span><span class='line'>&gt; chmod 600 server.key
+</span><span class='line'>&gt; openssl req -new -key server.key -out server.csr
+</span><span class='line'>&gt; openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Uncomment SSL setting include on /etc/httpd/conf/httpd.conf.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Secure (SSL/TLS) connections
+</span><span class='line'>Include conf/extra/httpd-ssl.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Start Apache service.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; systemctl start httpd.service</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enable Apache service to start it automatically at system boot.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; systemctl enable httpd.service</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Maria DB configuration.</h2>
+
+<p>Start mysqld.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; systemctl start mysqld</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Verify user list.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; mysql -u root
+</span><span class='line'>
+</span><span class='line'>MariaDB [(none)]&gt; select host,user,password from mysql.user;
+</span><span class='line'>+-----------+------+----------+
+</span><span class='line'>| host      | user | password |
+</span><span class='line'>+-----------+------+----------+
+</span><span class='line'>| localhost | root |          |
+</span><span class='line'>| kazuya    | root |          |
+</span><span class='line'>| 127.0.0.1 | root |          |
+</span><span class='line'>| ::1       | root |          |
+</span><span class='line'>| localhost |      |          |
+</span><span class='line'>| kazuya    |      |          |
+</span><span class='line'>+-----------+------+----------+
+</span><span class='line'>6 rows in set (0.00 sec)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Set password for each users.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MariaDB [(none)]&gt; set password for root@localhost = password('******');
+</span><span class='line'>Query OK, 0 rows affected (0.00 sec)
+</span><span class='line'>
+</span><span class='line'>MariaDB [(none)]&gt; set password for root@kazuya = password('******');
+</span><span class='line'>Query OK, 0 rows affected (0.00 sec)
+</span><span class='line'>
+</span><span class='line'>MariaDB [(none)]&gt; set password for root@127.0.0.1 = password('******');
+</span><span class='line'>Query OK, 0 rows affected (0.00 sec)
+</span><span class='line'>
+</span><span class='line'>MariaDB [(none)]&gt; select host,user,password from mysql.user;
+</span><span class='line'>+-----------+------+-------------------------------------------+
+</span><span class='line'>| host      | user | password                                  |
+</span><span class='line'>+-----------+------+-------------------------------------------+
+</span><span class='line'>| localhost | root | *B80F21401C33236FF4B13E3E57255D93821112CF |
+</span><span class='line'>| kazuya    | root | *B80F21401C33236FF4B13E3E57255D93821112CF |
+</span><span class='line'>| 127.0.0.1 | root | *B80F21401C33236FF4B13E3E57255D93821112CF |
+</span><span class='line'>| ::1       | root |                                           |
+</span><span class='line'>| localhost |      |                                           |
+</span><span class='line'>| kazuya    |      |                                           |
+</span><span class='line'>+-----------+------+-------------------------------------------+
+</span><span class='line'>6 rows in set (0.00 sec)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Set MariaDB to start automatically when boot.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; systemctl enable mysqld</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. phpMyAdmin configuration.</h2>
+
+<p>phpMyAdmin is a web browser-based MySQL management tool using Apache and PHP.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; pacman -S phpmyadmin
+</span><span class='line'>&gt; pacman -S php-mcrypt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Copy example setting file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cp /etc/webapps/phpmyadmin/apache.example.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit /etc/httpd/conf/httpd.conf file to include phpMyAdmin configuration file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># phpMyAdmin configuration
+</span><span class='line'>Include conf/extra/httpd-phpmyadmin.conf</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setup Wireless Network With USB Wifi Adapter]]></title>

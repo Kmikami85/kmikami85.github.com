@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Arch Linux Installation - My Tech Blog</title>
+  <title>Yoct Project Installation - My Tech Blog</title>
   <meta name="author" content="Mikami Kazuya">
 
   
-  <meta name="description" content="If you are able to see below prompt after power-ON beagleboard-xM with inserting SD card,
-It means you have installed Arch Linux successfully. Let& &hellip;">
+  <meta name="description" content="Here an instruction to install Yoct on BeagleBoard-xM. 1. Yoct Project source code. 1
+mikami@ubuntu:~$ wget http://downloads.yoctoproject.org/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ It means you have installed Arch Linux successfully. Let& &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Kmikami85.github.com/blog/2014/02/03/arch-linux-installation">
+  <link rel="canonical" href="http://Kmikami85.github.com/blog/2014/02/03/yoct-project-installation">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Tech Blog" type="application/atom+xml">
@@ -69,7 +69,7 @@ It means you have installed Arch Linux successfully. Let& &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Arch Linux Installation</h1>
+      <h1 class="entry-title">Yoct Project Installation</h1>
     
     
       <p class="meta">
@@ -85,97 +85,71 @@ It means you have installed Arch Linux successfully. Let& &hellip;">
   
 
 
-<time datetime="2014-02-03T16:04:49+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
+<time datetime="2014-02-03T17:09:19+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>If you are able to see below prompt after power-ON beagleboard-xM with inserting SD card,
-It means you have installed Arch Linux successfully. Let&rsquo;s start basic setting of Linux.</p>
+<div class="entry-content"><p>Here an instruction to install Yoct on BeagleBoard-xM.</p>
 
-<h2>1. Enter Arch Linux.(login:root password:root)</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Arch Linux 3.7.10-9-ARCH (ttyO2)
-</span><span class='line'>
-</span><span class='line'>alarm login: root
-</span><span class='line'>Password:</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>2. Change host name.(hostname:kazuya-server)</h2>
+<h2>1. Yoct Project source code.</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; hostnamectl set-hostname kazuya-server</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ wget http://downloads.yoctoproject.org/releases/yocto/yocto-1.5/poky-dora-10.0.0.tar.bz2</span></code></pre></td></tr></table></div></figure>
 
 
-<p>The command will be reflected on /etc/hostname.</p>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cat /etc/hostname
-</span><span class='line'>kazuya-server</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ tar xvjf poky-dora-10.0.0.tar.bz2</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>3. Add User.(user id:kazuya)</h2>
+<h2>2. Setting up required packages.</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;useradd -m -s /bin/bash kazuya
-</span><span class='line'>&gt;passwd kazuya
-</span><span class='line'>Enter new UNIX password:
-</span><span class='line'>Retype new UNIX password:
-</span><span class='line'>passwd: password updated successfully</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>4. Enable added user to use root command with using sudo command.</h2>
-
-<p>Open visudo editor for this particular purpose.</p>
+<p>The essential and graphical support packages are required for a Ubuntu distribution.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; VISUAL="/usr/bin/vim -p -X" visudo</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ sudo apt-get install sed wget subversion git-core coreutils unzip texi2html texinfo libsdl1.2-dev docbook-utils fop gawk python-pysqlite2 diffstat make gcc build-essential xsltproc g++ desktop-file-utils chrpath libgl1-mesa-dev libglu1-mesa-dev autoconf automake groff libtool xterm libxml-parser-perl</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Add new below line to give sudo permission.</p>
+<h2>3. Initializing build environment.</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>##
-</span><span class='line'>## User privilege specification
-</span><span class='line'>##
-</span><span class='line'>root ALL=(ALL) ALL
-</span><span class='line'>kazuya ALL=(ALL) ALL    // Give sudo permission to user "kazuya".</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>5. Change locale as Japanese setting.</h2>
-
-<p>Open the text /etc/locale.gen using any editor.
-Uncomment below lines.</p>
+<p>Create working directory.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#en_SG ISO-8859-1
-</span><span class='line'>en_US.UTF-8 UTF-8    // UTF-8 support for English.
-</span><span class='line'>#en_US ISO-8859-1
-</span><span class='line'>
-</span><span class='line'>#ja_JP.EUC-JP EUC-JP
-</span><span class='line'>ja_JP.UTF-8 UTF-8    // UTF-8 support for Japanese.
-</span><span class='line'>#ka_GE.UTF-8 UTF-8</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ mkdir myYoct</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configure to enable the created working directory to use build environment.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~$ source poky-dora-10.0.0/oe-init-build-env myYoct</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Configuring local.conf.</h2>
+
+<p>Initialize build setting and target setting through a conf/local.conf existing in working directory.
+Now I&rsquo;m suppose to use hardware board target machine Beagleboard-xM, it&rsquo;s required to change as below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MACHINE ?= "beagleboard"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I also have modified processor number to speedup build process.
+We could change variable from 2 to &lt;processor number&gt; * 2.
+Assuming I&rsquo;m using build machine which has Intel Core i5-2537M, processor number is 2.
+Then I could set 4 as below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>BB_NUMBER_THREADS = "4"&lt;br /&gt;PARALLEL_MAKE = "-j 4"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. Building the image.</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mikami@ubuntu:~/myYoct$ bitbake core-image-minimal</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -199,12 +173,12 @@ Uncomment below lines.</p>
   
 
 
-<time datetime="2014-02-03T16:04:49+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
+<time datetime="2014-02-03T17:09:19+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/beagleboard-xm/'>BeagleBoard-xM</a>, <a class='category' href='/blog/categories/web-server-on-beagleboard-xm/'>WEB server on BeagleBoard-xM</a>
+    <a class='category' href='/blog/categories/beagleboard-xm/'>BeagleBoard-xM</a>
   
 </span>
 
@@ -213,7 +187,7 @@ Uncomment below lines.</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Kmikami85.github.com/blog/2014/02/03/arch-linux-installation/" data-via="" data-counturl="http://Kmikami85.github.com/blog/2014/02/03/arch-linux-installation/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Kmikami85.github.com/blog/2014/02/03/yoct-project-installation/" data-via="" data-counturl="http://Kmikami85.github.com/blog/2014/02/03/yoct-project-installation/" >Tweet</a>
   
   
   
@@ -222,10 +196,8 @@ Uncomment below lines.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/03/sd-card-creation/" title="Previous Post: SD Card Creation">&laquo; SD Card Creation</a>
+        <a class="basic-alignment left" href="/blog/2014/02/03/lamp-installation/" title="Previous Post: LAMP Installation">&laquo; LAMP Installation</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/03/setup-wireless-network-with-usb-wifi-adapter/" title="Next Post: Setup wireless network with USB wifi adapter">Setup wireless network with USB wifi adapter &raquo;</a>
       
     </p>
   </footer>

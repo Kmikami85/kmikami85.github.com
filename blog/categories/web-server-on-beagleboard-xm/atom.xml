@@ -4,7 +4,7 @@
   <title><![CDATA[Category: WEB Server on BeagleBoard-xM | My Tech Blog]]></title>
   <link href="http://Kmikami85.github.com/blog/categories/web-server-on-beagleboard-xm/atom.xml" rel="self"/>
   <link href="http://Kmikami85.github.com/"/>
-  <updated>2014-02-03T16:35:23+09:00</updated>
+  <updated>2014-02-03T17:29:49+09:00</updated>
   <id>http://Kmikami85.github.com/</id>
   <author>
     <name><![CDATA[Mikami Kazuya]]></name>
@@ -12,6 +12,238 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[LAMP Installation]]></title>
+    <link href="http://Kmikami85.github.com/blog/2014/02/03/lamp-installation/"/>
+    <updated>2014-02-03T16:44:27+09:00</updated>
+    <id>http://Kmikami85.github.com/blog/2014/02/03/lamp-installation</id>
+    <content type="html"><![CDATA[<p>This article provides the way how to install LAMP with meaning in below on ArchLinux setup for bringing web development environment.</p>
+
+<p>L &mdash; Linux <br/>
+A &mdash; Apache <br/>
+M &mdash; MariaDB<br/>
+P &mdash; PHP</p>
+
+<h2>1. Install all required packages.</h2>
+
+<p>```</p>
+
+<blockquote><p>pacman -S apache
+pacman -S php
+pacman -S php-apache
+pacman -S mariadb
+```</p></blockquote>
+
+<h2>2. Apache configuration.</h2>
+
+<p>Backup original httpd.conf file.</p>
+
+<p>```</p>
+
+<blockquote><p>cp httpd.conf httpd.conf.org
+```</p></blockquote>
+
+<p>Edit /etc/httpd/conf/httpd.conf file to support PHP on Apache.</p>
+
+<p>```
+LoadModule php5_module modules/libphp5.so</p>
+
+<p>:</p>
+
+<h1>PHP support on Apache</h1>
+
+<p>Include conf/extra/php5_module.conf
+```</p>
+
+<p>Edit /etc/httpd/conf/mime.types to support expension php and php5.</p>
+
+<p><code>
+application/x-httpd-php                         php php5
+</code></p>
+
+<p>Edit /etc/httpd/conf/httpd.conf file to include user directory config file.</p>
+
+<p>```</p>
+
+<h1>User directory settings</h1>
+
+<p>Include conf/extra/httpd-userdir.conf
+```</p>
+
+<p>Create web sharing folder under user directory.</p>
+
+<p>```</p>
+
+<blockquote><p>mkdir /home/kazuya/public_html
+chmod o+x /home/kazuya/public_html/
+```</p></blockquote>
+
+<p>Configure user directory setting on /etc/httpd/conf/extra/httpd-userdir.conf for example..</p>
+
+<p>```</p>
+
+<h1>Settings for user home directories</h1>
+
+<p>#</p>
+
+<h1>Required module: mod_userdir</h1>
+
+<p>#</p>
+
+<h1>UserDir: The name of the directory that is appended onto a user&rsquo;s home</h1>
+
+<h1>directory if a ~user request is received.  Note that you must also set</h1>
+
+<h1>the default access control for these directories, as in the example below.</h1>
+
+<p>#
+UserDir public_html</p>
+
+<p>#</p>
+
+<h1>Control access to UserDir directories.  The following is an example</h1>
+
+<h1>for a site where these directories are restricted to read-only.</h1>
+
+<p>#</p>
+
+<pre><code>AllowOverride FileInfo AuthConfig Limit Indexes
+Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+
+    Order allow,deny
+    Allow from all
+
+
+    Order deny,allow
+    Deny from all
+</code></pre>
+
+<p>```</p>
+
+<p>SSL setting.</p>
+
+<p>```</p>
+
+<blockquote><p>cd /etc/httpd/conf
+openssl genrsa -out server.key 2048
+chmod 600 server.key
+openssl req -new -key server.key -out server.csr
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+```</p></blockquote>
+
+<p>Uncomment SSL setting include on /etc/httpd/conf/httpd.conf.</p>
+
+<p>```</p>
+
+<h1>Secure (SSL/TLS) connections</h1>
+
+<p>Include conf/extra/httpd-ssl.conf
+```</p>
+
+<p>Start Apache service.</p>
+
+<p>```</p>
+
+<blockquote><p>systemctl start httpd.service
+```</p></blockquote>
+
+<p>Enable Apache service to start it automatically at system boot.</p>
+
+<p>```</p>
+
+<blockquote><p>systemctl enable httpd.service
+```</p></blockquote>
+
+<h2>3. Maria DB configuration.</h2>
+
+<p>Start mysqld.</p>
+
+<p>```</p>
+
+<blockquote><p>systemctl start mysqld
+```</p></blockquote>
+
+<p>Verify user list.</p>
+
+<p>```</p>
+
+<blockquote><p>mysql -u root</p></blockquote>
+
+<p>MariaDB [(none)]> select host,user,password from mysql.user;
++&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;+
+| host      | user | password |
++&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;+
+| localhost | root |          |
+| kazuya    | root |          |
+| 127.0.0.1 | root |          |
+| ::1       | root |          |
+| localhost |      |          |
+| kazuya    |      |          |
++&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;+
+6 rows in set (0.00 sec)
+```</p>
+
+<p>Set password for each users.</p>
+
+<p>```
+MariaDB [(none)]> set password for root@localhost = password(&lsquo;******&rsquo;);
+Query OK, 0 rows affected (0.00 sec)</p>
+
+<p>MariaDB [(none)]> set password for root@kazuya = password(&lsquo;******&rsquo;);
+Query OK, 0 rows affected (0.00 sec)</p>
+
+<p>MariaDB [(none)]> set password for <a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#x72;&#111;&#111;&#x74;&#64;&#49;&#50;&#55;&#46;&#x30;&#46;&#48;&#46;&#49;">&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#50;&#x37;&#46;&#x30;&#x2e;&#x30;&#x2e;&#x31;</a> = password(&lsquo;******&rsquo;);
+Query OK, 0 rows affected (0.00 sec)</p>
+
+<p>MariaDB [(none)]> select host,user,password from mysql.user;
++&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| host      | user | password                                  |
++&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| localhost | root | <em>B80F21401C33236FF4B13E3E57255D93821112CF |
+| kazuya    | root | </em>B80F21401C33236FF4B13E3E57255D93821112CF |
+| 127.0.0.1 | root | *B80F21401C33236FF4B13E3E57255D93821112CF |
+| ::1       | root |                                           |
+| localhost |      |                                           |
+| kazuya    |      |                                           |
++&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+6 rows in set (0.00 sec)
+```</p>
+
+<p>Set MariaDB to start automatically when boot.</p>
+
+<p>```</p>
+
+<blockquote><p>systemctl enable mysqld
+```</p></blockquote>
+
+<h2>4. phpMyAdmin configuration.</h2>
+
+<p>phpMyAdmin is a web browser-based MySQL management tool using Apache and PHP.</p>
+
+<p>```</p>
+
+<blockquote><p>pacman -S phpmyadmin
+pacman -S php-mcrypt
+```</p></blockquote>
+
+<p>Copy example setting file.</p>
+
+<p>```</p>
+
+<blockquote><p>cp /etc/webapps/phpmyadmin/apache.example.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf
+```</p></blockquote>
+
+<p>Edit /etc/httpd/conf/httpd.conf file to include phpMyAdmin configuration file.</p>
+
+<p>```</p>
+
+<h1>phpMyAdmin configuration</h1>
+
+<p>Include conf/extra/httpd-phpmyadmin.conf
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setup Wireless Network With USB Wifi Adapter]]></title>
