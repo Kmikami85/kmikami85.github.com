@@ -4,7 +4,7 @@
   <title><![CDATA[My tech memo]]></title>
   <link href="http://Kmikami85.github.com/atom.xml" rel="self"/>
   <link href="http://Kmikami85.github.com/"/>
-  <updated>2014-02-03T14:36:11+09:00</updated>
+  <updated>2014-02-03T14:41:54+09:00</updated>
   <id>http://Kmikami85.github.com/</id>
   <author>
     <name><![CDATA[Mikami Kazuya]]></name>
@@ -18,7 +18,8 @@
     <link href="http://Kmikami85.github.com/blog/2014/02/03/test/"/>
     <updated>2014-02-03T14:28:05+09:00</updated>
     <id>http://Kmikami85.github.com/blog/2014/02/03/test</id>
-    <content type="html"><![CDATA[<p>This is just a test.</p>
+    <content type="html"><![CDATA[<p>This is just a test.
+test test test.</p>
 ]]></content>
   </entry>
   
