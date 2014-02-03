@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://Kmikami85.github.io/sitemap.xml 
+Sitemap: http://Kmikami85.github.com/sitemap.xml 

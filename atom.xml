@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[My tech memo]]></title>
-  <link href="http://Kmikami85.github.io/atom.xml" rel="self"/>
-  <link href="http://Kmikami85.github.io/"/>
-  <updated>2014-02-03T14:34:10+09:00</updated>
-  <id>http://Kmikami85.github.io/</id>
+  <link href="http://Kmikami85.github.com/atom.xml" rel="self"/>
+  <link href="http://Kmikami85.github.com/"/>
+  <updated>2014-02-03T14:36:11+09:00</updated>
+  <id>http://Kmikami85.github.com/</id>
   <author>
     <name><![CDATA[Mikami Kazuya]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Test]]></title>
-    <link href="http://Kmikami85.github.io/blog/2014/02/03/test/"/>
+    <link href="http://Kmikami85.github.com/blog/2014/02/03/test/"/>
     <updated>2014-02-03T14:28:05+09:00</updated>
-    <id>http://Kmikami85.github.io/blog/2014/02/03/test</id>
+    <id>http://Kmikami85.github.com/blog/2014/02/03/test</id>
     <content type="html"><![CDATA[<p>This is just a test.</p>
 ]]></content>
   </entry>
